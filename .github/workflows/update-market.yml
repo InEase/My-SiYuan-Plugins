@@ -25,6 +25,8 @@ jobs:
         with:
           node-version: 16.x
 
+      - run: npx --yes changelogithub --dry
+
       - uses: actions/setup-python@v4
         with:
           python-version: '3.9'
