@@ -4,7 +4,7 @@ import re
 regex = r"--------------((.|\n)*)--------------"
 
 # run `npx changelogithub --dry` and capture the output
-output = subprocess.run(["pnpm", "dlx", "changelogithub@0.12", "--dry"], shell=True, capture_output=True).stdout
+output = subprocess.run(["npx", "--yes", "changelogithub@0.12", "--dry"], shell=True, capture_output=True).stdout
 # convert output to string
 output = output.decode("utf-8")
 

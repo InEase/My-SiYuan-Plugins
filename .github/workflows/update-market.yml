@@ -12,11 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
+          fetch-depth: 0
           token: ${{ secrets.PAT }}
           repository: zuoez02/siyuan-plugins
 
       - uses: actions/checkout@v3
         with:
+          fetch-depth: 0
           path: updates
 
       - uses: actions/setup-node@v3
