@@ -29,6 +29,10 @@ jobs:
           rm -rf hide-content-when-unfocused
           mv updates/hide-content-when-unfocused .
 
+          # Color-Folder
+          rm -rf Color-Folder
+          mv updates/Color-Folder .
+
           # remove update
           rm -rf updates
 
