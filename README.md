@@ -5,3 +5,7 @@
 ## 多屏协作防偷窥 <sup>hide-content-when-unfocused</sup>
 
 窗口失去焦点时隐藏笔记内容
+
+## License
+
+[MIT](./LICENSE) License © 2023 [Mux](https://github.com/InEase)
