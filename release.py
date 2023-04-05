@@ -12,6 +12,7 @@ output = output.decode("utf-8")
 matches = re.search(regex, output, re.MULTILINE)
 
 if not matches:
+    print(output)
     raise Exception("No valid content found")
 
 updates = matches[0].replace("--------------", "").strip()
