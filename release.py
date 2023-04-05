@@ -4,16 +4,22 @@ import re
 regex = r"--------------((.|\n)*)--------------"
 
 # run `npx changelogithub --dry` and capture the output
-output = subprocess.check_output(["pnpm", "dlx", "changelogithub@0.12", "--dry"], shell=True)
+output = subprocess.run(["pnpm", "dlx", "changelogithub@0.12", "--dry"], shell=True, capture_output=True).stdout
 # convert output to string
 output = output.decode("utf-8")
 
-# use regex to extract
-matches = re.findall(regex, output, re.MULTILINE)
+# use regex to extract, match only once
+matches = re.search(regex, output, re.MULTILINE)
 
-content = matches[0] + """
+if not matches:
+    raise Exception("No valid content found")
+
+updates = matches[0].replace("--------------", "").strip()
+
+content = updates + """
 
 [Origin Repo](https://github.com/InEase/My-SiYuan-Plugins)
 
 """
+
 print(content)
