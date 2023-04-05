@@ -1,0 +1,60 @@
+name: PR To Markets
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT }}
+          repository: zuoez02/siyuan-plugins
+
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          path: updates
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: get release message
+        id: get_release_message
+        run: |
+          cd updates
+          python release.py
+
+      - name: Merge
+        run: |
+          git config --global user.email "InEase28@gmail.com"
+          git config --global user.name "Mux"
+
+          # hide-content-when-unfocused
+          rm -rf hide-content-when-unfocused
+          mv updates/hide-content-when-unfocused .
+
+          # remove update
+          rm -rf updates
+
+          # commit
+          git add .
+          git commit -m "Update Plugins"
+
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.PAT }}
+          delete-branch: true
+          title: 'Update Plugins'
+          body: ${{ steps.get_release_message.outputs.message }}
