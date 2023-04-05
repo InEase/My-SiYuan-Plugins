@@ -4,8 +4,8 @@ import re
 regex = r"--------------((.|\n)*)--------------"
 
 # run `npx changelogithub --dry` and capture the output
-output = subprocess.run(["npx", "--yes", "changelogithub", "--dry"], shell=True, capture_output=True).stdout
-print(output)
+process = subprocess.Popen(["npx", "--yes", "changelogithub", "--dry"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+output, error = process.communicate()
 # convert output to string
 output = output.decode("utf-8")
 
