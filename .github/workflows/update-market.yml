@@ -26,6 +26,7 @@ jobs:
           node-version: 16.x
 
       - run: npx --yes changelogithub --dry
+        working-directory: ./updates
 
       - uses: actions/setup-python@v4
         with:
