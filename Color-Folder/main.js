@@ -54,8 +54,41 @@ function onFileTreeUpdate() {
   return observe
 }
 
-function addFileTreeButton() {
+function MenuSeparator(className = 'b3-menu__separator') {
+  let node = document.createElement('button');
+  node.className = className;
+  return node;
+}
 
+setTimeout(() => ClickMonitor(), 1000)
+
+function ClickMonitor() {
+  window.addEventListener('mouseup', MenuShow)
+}
+
+function MenuShow() {
+  setTimeout(() => {
+    let node = document.querySelectorAll('.b3-list-item--focus')[0];
+    if (node.getAttribute("data-type") === "navigation-file") {
+      addFileTreeButton()
+    }
+  }, 0);
+}
+
+function addFileTreeButton() {
+  let button = document.createElement("button")
+  button.id = "color-select"
+  button.className = "b3-menu__item"
+  button.innerHTML = '<svg class="b3-menu__icon" style="null"><use xlink:href="#iconGlobalGraph"></use></svg><span class="b3-menu__label" style="">修改颜色</span></button>'
+  button.appendChild(SubMenu(selectid, selecttype))
+
+  let commonMenu = document.getElementById("commonMenu")
+  let readonly = commonMenu.querySelector(".b3-menu__item--readonly")
+  let colorselectel = commonMenu.querySelector('[id="color-select"]')
+  if (!readonly && !colorselectel) {
+    commonMenu.insertBefore("beforeend", MenuSeparator())
+    commonMenu.insertBefore("beforeend", button)
+  }
 }
 
 
