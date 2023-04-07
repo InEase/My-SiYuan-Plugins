@@ -75,7 +75,7 @@ function generateFontStyle() {
 }
 
 async function handleSetColor(event) {
-  let color = event.target.style.color;
+  let color = event.target.style.color || event.target.querySelector(".color__square").style.color;
   let node = document.querySelectorAll('.b3-list-item--focus')[0];
   let id = node.getAttribute("data-node-id")
   // save
